@@ -1,0 +1,61 @@
+<html>
+  <head>
+      <title>FruitSlice</title>
+  </head>
+    <style>
+
+      @font-face { 
+        font-family: Juicy; 
+        src: url('Juicy.ttf'); 
+      } 
+
+      canvas {
+        font-family: 'Juicy';
+        position: absolute;
+        top: 130px;
+        left: 0px; 
+        right: 0px;
+        margin: auto;
+      }
+      
+      h1 {
+        font-family: 'Juicy';
+        position: absolute;
+        text-align: center;
+        color: coral;
+        left: 0px; 
+        right: 0px;
+        padding-top: 0%;
+        font-size: 350%;
+        letter-spacing: -2px;
+        text-shadow: 0 1px 0px #FFFFFF, 1px 0 0px #FFFFFF, 1px 2px 1px #FFFFFF, 2px 1px 1px #FFFFFF, 2px 3px 2px #8B0000, 3px 2px 2px #8B0000, 3px 4px 2px #8B0000, 4px 3px 3px #8B0000, 4px 5px 3px #8B0000, 5px 4px 2px #8B0000, 5px 6px 2px #8B0000, 6px 5px 2px #8B0000, 6px 7px 1px #8B0000, 7px 6px 1px #8B0000, 7px 8px 0px #8B0000, 8px 7px 0px #8B0000; 
+      }
+
+      html {
+        background: url(Images/sfondo.png);
+        background-repeat: repeat;
+        background-size: 300px 300px;
+        background-position: center;
+      }
+
+    </style>
+
+  <body>
+    <h1>
+      <span style='color: #ad1116'>F</span>
+      <span style='color: #2f9a3b'>r</span>
+      <span style='color: #ffd300'>u</span>
+      <span style='color: #4e2765'>i</span>
+      <span style='color: #9bc33c'>t</span>
+      <span style='color: #2f9a3b'>S</span>
+      <span style='color: #ffd300'>l</span>
+      <span style='color: #4e2765'>i</span>
+      <span style='color: #9bc33c'>c</span>
+      <span style='color: #ad1116'>e</span>
+    </h1>
+        
+    <canvas id="myCanvas" width="640" height="360"></canvas>
+
+    <script src="fruitspawner.js"></script>
+  </body>
+</html>
