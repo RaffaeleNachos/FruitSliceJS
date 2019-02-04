@@ -336,7 +336,7 @@ class Hearts {
             this.y=mouseY;
             isdragging=true;
          }
-         if(this.x > 500 && this.y<50 && addedlife==false){
+         if(this.x > 500 && this.y<50 && addedlife==false && mouseispressed==false){
             if (lifes<3) lifes+=1;
             addedlife=true;
             isdragging=false;
