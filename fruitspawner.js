@@ -1,3 +1,8 @@
+//TODO: spostare fuori dalle classi il caricamento delle foto altrimenti vengono caricate alla creazione di ogni nuovo oggetto
+//portare tutto in 960x540
+//funzione per controllare se sono all'interno del tasto -> astraggo
+//vedere come evitare di disegnare la frutta tagliata o che è caduta
+
 var myCanvas = document.getElementById("myCanvas");
 var c = myCanvas.getContext("2d");
 
@@ -88,13 +93,28 @@ cherries = [];
 bombs = [];
 var pluslife;
 
+//fruits images
+var appleimg = new Image();
+appleimg.src = "Images/apple.png";
+var slicedappleimg = new Image();
+slicedappleimg.src = "Images/slicedapple.png";
+var pearimg = new Image();
+pearimg.src = "Images/pear.png";
+var slicedpearimg = new Image();
+slicedpearimg.src = "Images/slicedpear.png";
+var cherryimg = new Image();
+cherryimg.src = "Images/cherry.png";
+var slicedcherryimg = new Image();
+slicedcherryimg.src = "Images/slicedcherry.png";
+var bombimg = new Image();
+bombimg.src = "Images/bomb.png";
+var slicedbombimg = new Image();
+slicedbombimg.src = "Images/exp2.png";
+
+
 //class for fruits
 class Apples {
    constructor(x, y) {
-      var appleimg = new Image();
-      appleimg.src = "Images/apple.png";
-      var slicedappleimg = new Image();
-      slicedappleimg.src = "Images/slicedapple.png";
       this.x = x;
       this.y = y;
       var sidemove= Math.random()*1.1;
@@ -143,10 +163,6 @@ class Apples {
 
 class Pears {
    constructor(x, y) {
-      var pearimg = new Image();
-      pearimg.src = "Images/pear.png";
-      var slicedpearimg = new Image();
-      slicedpearimg.src = "Images/slicedpear.png";
       this.x = x;
       this.y = y;
       var sidemove= Math.random()*1.2;
@@ -194,10 +210,6 @@ class Pears {
 
 class Cherry {
    constructor(x, y) {
-      var cherryimg = new Image();
-      cherryimg.src = "Images/cherry.png";
-      var slicedcherryimg = new Image();
-      slicedcherryimg.src = "Images/slicedcherry.png";
       this.x = x;
       this.y = y;
       var sidemove= Math.random()*1.3;
@@ -245,10 +257,6 @@ class Cherry {
 
 class Bomb {
    constructor(x, y) {
-      var bombimg = new Image();
-      bombimg.src = "Images/bomb.png";
-      var slicedbombimg = new Image();
-      slicedbombimg.src = "Images/exp2.png";
       this.x = x;
       this.y = y;
       var dim=62;
@@ -263,6 +271,7 @@ class Bomb {
       var removedlife = false;
       var to_rad = Math.PI/180;
       var alpha=0;
+      var transp = 1;
       this.draw = function () {
          if (sliced==false) {
             c.save();
@@ -275,11 +284,14 @@ class Bomb {
          }
 
          if (sliced==true) {
+            c.save();
+            c.globalAlpha = transp;
             c.drawImage(slicedbombimg, expx, expy, dim, dim);
-            if (dim!=0) {
-               dim=dim-1;
-               expx+=1;
-               expy+=1;
+            c.restore();
+            console.log(transp);
+            if (transp>=0.01) {
+               transp-=0.01;
+               transp = transp.toPrecision(2);
             }
          }
       };
@@ -291,7 +303,7 @@ class Bomb {
             expy=this.y;
          }
          if (sliced==true && removedlife==false) {
-            if (globalpoints>400) {
+            if (globalpoints>=400) {
                lifes-=1;
                globalpoints-=400;
             }
@@ -322,7 +334,7 @@ class Hearts {
       //Math.random() * (max - min) + min
       var dy = - (Math.random() * (2.5) + 5);
       var gravity = 0;
-      this.mytimer = Math.random() * 40000 + 20000;
+      this.mytimer = Math.random() * (40000-15000) + 15000;
       var addedlife = false;
       var isdragging = false;
       var to_rad = Math.PI/180;
@@ -390,8 +402,8 @@ function animate(time){
    //start menu
    if(menu==0){
       c.clearRect(0, 0, myCanvas.clientWidth, myCanvas.clientHeight);
-      c.drawImage(backjap,0,0, 640, 360);
-      c.drawImage(menufruitsback,0,0, 640, 360);
+      c.drawImage(backjap,-65,-70, 795, 495);
+      c.drawImage(menufruitsback,10, 10, 620, 340);
       c.drawImage(creditsImage, buttonsX[1], buttonsY[1]);
       c.drawImage(startImage, buttonsX[0], buttonsY[0]);
       if(mouseX > buttonsX[0] && mouseX < buttonsX[0] + buttonsWidth[0] && mouseY > buttonsY[0] && mouseY < buttonsY[0] + buttonsHeight[0]){
@@ -433,37 +445,37 @@ function animate(time){
       }
       time = time - p;
       c.clearRect(0, 0, myCanvas.clientWidth, myCanvas.clientHeight);
-      c.drawImage(backjap,0,0, 640, 360);
+      c.drawImage(backjap,-65,-70, 795, 495);
       c.font = "50px Juicy";
       c.fillStyle = "white";
-      c.fillText(globalpoints, 20, 40);
+      c.fillText(globalpoints, 20, 45);
       timer = Math.floor(60 - (time/1000));
       if (timer<0){
-         c.fillText("Timeout!", 220, 40)
+         c.fillText("Timeout!", 220, 45)
          mouseispressed=false;
       }
       else {
-         c.fillText(timer + "s", 280, 40);
+         c.fillText(timer + "s", 280, 45);
       }
       if (timer==-5) menu=3;
 
       if(lifes==3){
-         c.drawImage(heart,500, 10, 40, 40);
-         c.drawImage(heart,540, 10, 40, 40);
-         c.drawImage(heart,580, 10, 40, 40);
+         c.drawImage(heart,500, 15, 40, 40);
+         c.drawImage(heart,540, 15, 40, 40);
+         c.drawImage(heart,580, 15, 40, 40);
       }
       else if(lifes==2){
-         c.drawImage(heart,500, 10, 40, 40);
-         c.drawImage(heart,540, 10, 40, 40);
+         c.drawImage(heart,500, 15, 40, 40);
+         c.drawImage(heart,540, 15, 40, 40);
       }
       else if(lifes==1){
-         c.drawImage(heart,500, 10, 40, 40);
+         c.drawImage(heart,500, 15, 40, 40);
       }
       else{
          menu=3;
       }
 
-       //better while
+      //better while
       for(i = 0; i < apples.length; i++){
          if(time - start > apples[i].timer*(i)) apples[i].update();
          if(time - start > pears[i].timer*(i+0.5)) pears[i].update();
@@ -476,7 +488,7 @@ function animate(time){
    //credits
    if(menu==2){
       c.clearRect(0, 0, myCanvas.clientWidth, myCanvas.clientHeight);
-      c.drawImage(backjap,0,0, 640, 360);
+      c.drawImage(backjap,-65,-70, 795, 495);
       c.font = "50px Juicy";
       c.fillStyle = "white";
       c.fillText("Coded by Raffaele Apetino", 45, 60);
@@ -519,7 +531,7 @@ function animate(time){
    //end game menu
    if(menu==3){
       c.clearRect(0, 0, myCanvas.clientWidth, myCanvas.clientHeight);
-      c.drawImage(backjap,0,0, 640, 360);
+      c.drawImage(backjap,-65,-70, 795, 495);
       c.font = "50px Juicy";
       c.fillStyle = "white";
       c.fillText("Your Score: " + globalpoints, 160, 95);
