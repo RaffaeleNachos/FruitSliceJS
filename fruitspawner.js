@@ -402,7 +402,7 @@ function animate(time){
    //start menu
    if(menu==0){
       c.clearRect(0, 0, myCanvas.clientWidth, myCanvas.clientHeight);
-      c.drawImage(backjap,-65,-70, 795, 495);
+      c.drawImage(backjap,0,0, 640, 360);
       c.drawImage(menufruitsback,10, 10, 620, 340);
       c.drawImage(creditsImage, buttonsX[1], buttonsY[1]);
       c.drawImage(startImage, buttonsX[0], buttonsY[0]);
@@ -445,7 +445,7 @@ function animate(time){
       }
       time = time - p;
       c.clearRect(0, 0, myCanvas.clientWidth, myCanvas.clientHeight);
-      c.drawImage(backjap,-65,-70, 795, 495);
+      c.drawImage(backjap,0,0, 640, 360);
       c.font = "50px Juicy";
       c.fillStyle = "white";
       c.fillText(globalpoints, 20, 45);
@@ -488,7 +488,7 @@ function animate(time){
    //credits
    if(menu==2){
       c.clearRect(0, 0, myCanvas.clientWidth, myCanvas.clientHeight);
-      c.drawImage(backjap,-65,-70, 795, 495);
+      c.drawImage(backjap,0,0, 640, 360);
       c.font = "50px Juicy";
       c.fillStyle = "white";
       c.fillText("Coded by Raffaele Apetino", 45, 60);
@@ -531,7 +531,7 @@ function animate(time){
    //end game menu
    if(menu==3){
       c.clearRect(0, 0, myCanvas.clientWidth, myCanvas.clientHeight);
-      c.drawImage(backjap,-65,-70, 795, 495);
+      c.drawImage(backjap,0,0, 640, 360);
       c.font = "50px Juicy";
       c.fillStyle = "white";
       c.fillText("Your Score: " + globalpoints, 160, 95);
